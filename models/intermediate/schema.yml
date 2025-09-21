@@ -1,0 +1,75 @@
+version: 2
+
+# INT LAYER
+
+models:
+  - name: int_players_male
+    description: "Intermediate layer: male players"
+    columns:
+      - name: player_id
+        description: "Unique player identifier"
+        data_data_tests:
+          - not_null
+          - unique
+      - name: club_team_id
+        description: "Unique team identifier"
+        data_tests:
+          - not_null
+      - name: short_name
+        description: "Player short name"
+        data_tests:
+          - not_null
+      - name: wage_eur
+        data_tests:
+          - wage_value:
+              severity: warn
+
+  - name: int_players_female
+    description: "Intermediate layer: female players"
+    columns:
+      - name: player_id
+        description: "Unique player identifier"
+        data_tests:
+          - not_null
+          - unique
+      - name: club_team_id
+        description: "Unique team identifier"
+        data_tests:
+          - not_null
+      - name: short_name
+        description: "Player short name"
+        data_tests:
+          - not_null
+      - name: wage_eur
+        data_tests:
+          - wage_value:
+              severity: warn
+
+  - name: int_team_profiles_male
+    description: "Intermediate layer: team profiles male"
+    columns:
+      - name: team_id
+        data_tests:
+          - unique
+          - not_null
+      - name: avg_player_rating
+        data_tests:
+          - not_null
+          - team_avg_rating_range:
+              severity: warn
+
+  - name: int_team_profiles_female
+    description: "Intermediate layer: team profiles female"
+    columns:
+      - name: team_id
+        data_tests:
+          - unique
+          - not_null
+      - name: avg_player_rating
+        data_tests:
+          - not_null
+          - team_avg_rating_range:
+              severity: warn
+
+data_tests:
+  - unique_player_id_across_tables

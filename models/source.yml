@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: raw
+    database: postgres
+    schema: raw
+    tables:
+      - name: male_coaches
+      - name: female_coaches
+      - name: male_teams
+      - name: female_teams
+      - name: male_players
+      - name: female_players
